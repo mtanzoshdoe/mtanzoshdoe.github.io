@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+        <title>Exam Time Calculator</title>
+        <script>
+            function calculateExtendedTimes() {
+                // Get values from the input fields for both sections
+                const section1Hours = parseInt(document.getElementById('section1Hours').value, 10) || 0;
+                const section1Minutes = parseInt(document.getElementById('section1Minutes').value, 10) || 0;
+                const section2Hours = parseInt(document.getElementById('section2Hours').value, 10) || 0;
+                const section2Minutes = parseInt(document.getElementById('section2Minutes').value, 10) || 0;
+                const breakMinutes = parseInt(document.getElementById('breakMinutes').value, 10) || 0;
+                const setUpMinutes = parseInt(document.getElementById('setUpMinutes').value, 10) || 0;
+
+                // Convert section times to minutes
+                const totalSectionTimeInMinutes = ((section1Hours + section2Hours) * 60) + section1Minutes + section2Minutes;
+
+                // Calculate Regular Time (including break and set up times)
+                const regularTime = totalSectionTimeInMinutes + breakMinutes + setUpMinutes;
+
+                // Calculate Time and a Half (1.5x for section time only)
+                const timeAndHalf = (totalSectionTimeInMinutes * 1.5) + breakMinutes + setUpMinutes;
+
+                // Calculate Double Time (2x for section time only)
+                const doubleTime = (totalSectionTimeInMinutes * 2) + breakMinutes + setUpMinutes;
+
+                // Display the results in hours and minutes
+                document.getElementById('regularTimeResult').textContent = `Regular Time: ${formatTime(regularTime)}`;
+                document.getElementById('timeAndHalfResult').textContent = `Time and a Half: ${formatTime(timeAndHalf)}`;
+                document.getElementById('doubleTimeResult').textContent = `Double Time: ${formatTime(doubleTime)}`;
+            }
+
+            // Helper function to format time from minutes to "X hours Y minutes"
+            function formatTime(minutes) {
+                const hours = Math.floor(minutes / 60);
+                const mins = Math.round(minutes % 60); // Round minutes to deal with floating point arithmetic
+                if (mins) {
+                    return `${hours} hours ${mins} minutes`;
+                }
+                return `${hours} hours`
+
+            }
+        </script>
+        <style>
+            .container {
+                width: 50%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container mt-5">
+            <h2>Exam Time Calculator</h2>
+
+            <div class="row mt-4">
+                <div class="col">
+                    <label class="mb-2">Section 1 Hours</label>
+                    <input type="number" class="form-control" id="section1Hours" placeholder="Hours">
+                </div>
+                <div class="col">
+                    <label class="mb-2">Section 1 Minutes</label>
+                    <input type="number" class="form-control" id="section1Minutes" placeholder="Minutes">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col">
+                    <label class="mb-2">Section 2 Hours</label>
+                    <input type="number" class="form-control" id="section2Hours" placeholder="Hours">
+                </div>
+                <div class="col">
+                    <label class="mb-2">Section 2 Minutes</label>
+                    <input type="number" class="form-control" id="section2Minutes" placeholder="Minutes">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col">
+                    <label class="mb-2">Break Time Minutes</label>
+                    <input type="number" class="form-control" id="breakMinutes" placeholder="Minutes" value="10">
+                </div>
+                <div class="col">
+                    <label class="mb-2">Set Up Time Minutes</label>
+                    <input type="number" class="form-control" id="setUpMinutes" placeholder="Minutes" value="20">
+                </div>
+            </div>
+
+            <button onclick="calculateExtendedTimes()" type="button" class="btn btn-info mt-3">Calculate</button>
+
+            <h5 id="regularTimeResult" class="mt-3">Regular Time: </h5>
+            <h5 id="timeAndHalfResult">Time and a Half: </h5>
+            <h5 id="doubleTimeResult">Double Time: </h5>
+        </div>
+    </body>
+
+</html>
