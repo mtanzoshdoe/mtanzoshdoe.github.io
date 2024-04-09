@@ -1,0 +1,27 @@
+html,
+body {
+    margin: 100;
+    padding: 50;
+    text-align: center;
+}
+
+canvas {
+    display: block;
+}
+
+p {
+    text-align: left;
+    font-size: 1.4rem;
+    margin: 20px;
+    margin-bottom: 2px;
+}
+
+div {
+    margin-left: 400px;
+    margin-top: 10px;
+}
+
+button {
+    margin-left: 400px;
+    margin-top: 50px;
+}
