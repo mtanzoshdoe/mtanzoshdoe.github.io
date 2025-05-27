@@ -1,0 +1,14 @@
+html, body {
+  text-align: center;
+  background-color: red;
+}
+canvas {
+  display: block;
+}
+#myDiv {
+  width: 500px;
+  margin: auto;
+}
+
+
+
